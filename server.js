@@ -1,6 +1,6 @@
 var express = require("express");
 
-var parser = require("body-parser");
+var bodyParser = require("body-parser");
 
 var path = require("path");
 
@@ -8,15 +8,10 @@ var app = express();
 
 var PORT = process.env.PORT || 8000;
 
-var jsonParser = parser.json();
-
-var urlencodedParser = parser.urlencoded({ extended: false });
-
-app.use(parser.json({ type: "application/*+json" }));
-
-app.use(parser.raw({ type: "application/vnd.custom-type" }));
-
-app.use(parser.text({ type: "text/html" }));
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.text());
+app.use(bodyParser.json({ type: "application/vnd.api+json" }));
 
 require("./app/routing/apiRoutes.js")(app);
 require("./app/routing/htmlRoutes.js")(app);

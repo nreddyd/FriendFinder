@@ -7,9 +7,13 @@
     <title>Friend Finder</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
         crossorigin="anonymous">
+
     <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+        crossorigin="anonymous"></script>
+
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
         crossorigin="anonymous"></script>
 </head>
 
@@ -23,12 +27,10 @@
 
                 <h2>About You</h2>
                 <h4> Name</h4>
-                <input type="text" class="form-control" id="Username" placeholder="Username" aria-label="Username"
-                    aria-describedby="basic-addon1">
+                <input type="text" class="form-control" id="Username">
                 <br>
                 <h4> Photo Link </h4>
-                <input type="text" class="form-control" id="Image" placeholder="Image" aria-label="Image"
-                    aria-describedby="basic-addon1">
+                <input type="text" class="form-control" id="Image">
                 <br>
                 <hr>
 
@@ -274,35 +276,39 @@
         $(document).ready(function () {
             console.log("survey");
             $("#submit").on("click", function () {
-                console.log("submit clicked");
-                console.log($("#inputGroupSelect01").val());
+
+
+
+
                 if (validateInput() === true) {
+
                     var newUser = {
-                        name: $("#Username").val().trim(),
-                        photo: $("#Image").val().trim(),
-                        scores: [$("#inputGroupSelect01").val(),
-                        $("#inputGroupSelect02").val(),
-                        $("#inputGroupSelect03").val(),
-                        $("#inputGroupSelect04").val(),
-                        $("#inputGroupSelect05").val(),
-                        $("#inputGroupSelect06").val(),
-                        $("#inputGroupSelect07").val(),
-                        $("#inputGroupSelect08").val(),
-                        $("#inputGroupSelect09").val(),
-                        $("#inputGroupSelect10").val()]
-                    }
+                        name: $('#Username').val().trim(),
+                        photo: $('#Image').val().trim(),
+                        scores: [
+                            $('#inputGroupSelect01').val(),
+                            $('#inputGroupSelect02').val(),
+                            $('#inputGroupSelect03').val(),
+                            $('#inputGroupSelect04').val(),
+                            $('#inputGroupSelect05').val(),
+                            $('#inputGroupSelect06').val(),
+                            $('#inputGroupSelect07').val(),
+                            $('#inputGroupSelect08').val(),
+                            $('#inputGroupSelect09').val(),
+                            $('#inputGroupSelect10').val(),
+                        ]
+                    };
+
                     var currentURL = window.location.origin;
                     console.log(currentURL);
                     console.log("newUser");
 
                     console.log(newUser);
 
-
                     $.post(currentURL + "/api/friends", newUser, function (data) {
                         console.log(data);
                         $("#matchname").text(data.name);
                         $("#matchpic").attr("src", data.photo);
-                        console.log("survey.html", data);
                     });
                     $('.modal').modal('toggle');
                     $('#Username').val("");
@@ -322,23 +328,24 @@
                     alert("Please Complete ALL missing fields!");
                 }
 
+                function validateInput() {
+                    var isValidData = true;
+                    $(".form-control").each(function () {
+                        if ($(this).val() === "") {
+                            isValidData = false;
+                        }
+                    });
+
+                    $(".custom-select").each(function () {
+                        if ($(this).val() === "") {
+                            isValidData = false;
+                        }
+                    });
+                    return isValidData;
+                }
             });
 
-            function validateInput() {
-                var isValidData = true;
-                if ($(".form-control").each(function () {
-                    if ($(this).val === "") {
-                        isValidData = false;
-                    }
-                }));
 
-                if ($(".custom-select").each(function () {
-                    if ($(this).val === "") {
-                        isValidData = false;
-                    }
-                }));
-                return isValidData;
-            }
         });
 
     </script>
