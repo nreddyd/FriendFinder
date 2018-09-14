@@ -32,6 +32,14 @@ Answer the questions in below screen
 
 ![screen shot 2018-09-14 at 9 57 49 am](https://user-images.githubusercontent.com/37693981/45554558-c0461b00-b804-11e8-9a51-6b28ee38e21d.png)
 
+Click Submit after you answer all the questions
+
+![screen shot 2018-09-14 at 10 02 58 am](https://user-images.githubusercontent.com/37693981/45554938-790c5a00-b805-11e8-99a5-4f020eb91479.png)
+
+The app displays the best Buddy based on your answers choosen
+
+![screen shot 2018-09-14 at 10 03 16 am](https://user-images.githubusercontent.com/37693981/45554922-727de280-b805-11e8-9c27-9b43e9343c12.png)
+
 ## Technologies Used
 
 HTML,
